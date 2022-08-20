@@ -9,7 +9,7 @@ import android.widget.Toast;
 import java.io.DataOutputStream;
 
 public class MusicPlayerActivity extends AppCompatActivity {
-    TextView textView;
+
     int position = -1;
 
     @Override
@@ -17,9 +17,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_player);
 
-        textView = findViewById(R.id.textView);
 
-        position = getIntent().getIntExtra("position", -1);
-        textView.setText("position is : " + position);
     }
 }
