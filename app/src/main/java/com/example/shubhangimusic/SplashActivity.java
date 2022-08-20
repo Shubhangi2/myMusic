@@ -2,6 +2,7 @@ package com.example.shubhangimusic;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.IntentCompat;
@@ -24,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_splash);
 
         button = findViewById(R.id.button);
@@ -67,6 +69,7 @@ public class SplashActivity extends AppCompatActivity {
             button.setVisibility(View.INVISIBLE);
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }
