@@ -1,11 +1,13 @@
 package com.example.shubhangimusic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +34,15 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.myVi
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         AudioModel  songData = songsList.get(position);
         holder.title.setText(songData.getTitle());
+        
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, MusicPlayerActivity.class);
+                intent.putExtra("position", position);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
