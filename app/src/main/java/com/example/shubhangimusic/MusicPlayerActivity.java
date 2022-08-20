@@ -9,17 +9,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.PrimitiveIterator;
+import java.util.concurrent.TimeUnit;
 
 public class MusicPlayerActivity extends AppCompatActivity {
     ArrayList<AudioModel> musicList;
     TextView title, cTime, tTime;
     ImageView left, right, pausePlay;
+    SeekBar seekBar;
     static MediaPlayer mediaPlayer;
     static Uri uri;
 
@@ -33,6 +36,9 @@ public class MusicPlayerActivity extends AppCompatActivity {
         left = findViewById(R.id.left_arrow);
         right = findViewById(R.id.right_arrow);
         pausePlay = findViewById(R.id.pause);
+        seekBar = findViewById(R.id.mp_seekbar);
+        cTime = findViewById(R.id.current_time);
+        tTime = findViewById(R.id.total_time);
 
         title.setSelected(true);
 
@@ -48,7 +54,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
     private void getMusicWithResorces() {
         AudioModel curSong = musicList.get(position);
         title.setText(curSong.getTitle());
-//        mediaPlayer.reset();
+
+        cTime.setText(convertToMMSS("0"));
+        tTime.setText(convertToMMSS(curSong.getDuration()));
+
+
         if(musicList != null){
             uri = Uri.parse(curSong.getPath());
         }
@@ -98,5 +108,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
         }
     }
 
+    public static String convertToMMSS(String duration){
+        Long millis = Long.parseLong(duration);
+        return String.format("%02d:%02d",
+                TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
+                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
+    }
 
 }
