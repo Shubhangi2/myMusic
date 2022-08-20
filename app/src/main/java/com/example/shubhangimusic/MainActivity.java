@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<AudioModel> songsList = new ArrayList<>();
+    static ArrayList<AudioModel> songsList = new ArrayList<>();
     RecyclerView recyclerView;
 
     @Override
