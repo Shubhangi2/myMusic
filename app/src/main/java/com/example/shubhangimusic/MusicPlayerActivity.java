@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -48,6 +49,36 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         getMusicWithResorces();
 
+        MusicPlayerActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(mediaPlayer != null){
+                    seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                    cTime.setText(convertToMMSS(mediaPlayer.getCurrentPosition() + ""));
+                }
+                new Handler().postDelayed(this, 100);
+            }
+        });
+
+
+     seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+         @Override
+         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+             if((mediaPlayer != null) && b){
+                 mediaPlayer.seekTo(i);
+             }
+         }
+
+         @Override
+         public void onStartTrackingTouch(SeekBar seekBar) {
+
+         }
+
+         @Override
+         public void onStopTrackingTouch(SeekBar seekBar) {
+
+         }
+     });
 
     }
 
@@ -68,10 +99,14 @@ public class MusicPlayerActivity extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
             mediaPlayer.start();
+            seekBar.setProgress(0);
+            seekBar.setMax(mediaPlayer.getDuration());
 
         }else{
             mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
             mediaPlayer.start();
+            seekBar.setProgress(0);
+            seekBar.setMax(mediaPlayer.getDuration());
         }
         left.setOnClickListener(v->prevSong());
         right.setOnClickListener(v->nextSong());
