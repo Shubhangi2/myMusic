@@ -1,5 +1,6 @@
 package com.example.shubhangimusic;
 
+import static com.example.shubhangimusic.MainActivity.myposition;
 import static com.example.shubhangimusic.MainActivity.songsList;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -119,6 +120,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         }
         position = position - 1;
         getMusicWithResorces();
+        myposition = position;
     }
 
     private void nextSong(){
@@ -130,6 +132,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
         position = position + 1;
         getMusicWithResorces();
+        myposition = position;
 
     }
 
@@ -149,5 +152,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
     }
+
+
 
 }

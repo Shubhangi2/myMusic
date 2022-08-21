@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     static ArrayList<AudioModel> songsList = new ArrayList<>();
     RecyclerView recyclerView;
+    public static int myposition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 recyclerView.setAdapter(new MusicListAdapter(songsList, getApplicationContext()));
             }
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(recyclerView!=null){
+            recyclerView.setAdapter(new MusicListAdapter(songsList,getApplicationContext()));
         }
     }
 }

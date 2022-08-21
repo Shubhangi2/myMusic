@@ -1,7 +1,10 @@
 package com.example.shubhangimusic;
 
+import static com.example.shubhangimusic.MainActivity.myposition;
+
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,10 +37,15 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.myVi
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         AudioModel  songData = songsList.get(position);
         holder.title.setText(songData.getTitle());
+
+        if(myposition == position){
+            holder.title.setTextColor(Color.parseColor("#FF6200EE"));
+        }
         
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myposition = position;
                 Intent intent = new Intent(context, MusicPlayerActivity.class);
                 intent.putExtra("position", position);
                 view.getContext().startActivity(intent);
