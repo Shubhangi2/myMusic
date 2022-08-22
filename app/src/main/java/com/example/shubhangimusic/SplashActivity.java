@@ -35,7 +35,6 @@ public class SplashActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SplashActivity.this, "You clicked on me", Toast.LENGTH_SHORT).show();
                 askPermission();
             }
         });
